@@ -12,4 +12,6 @@ jspm_packages/
 .env
 .next
 .git
+.npmignore
+.gitignore
 
