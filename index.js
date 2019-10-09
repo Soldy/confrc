@@ -21,6 +21,11 @@ exports.confrc=function(){
     this.get=function(id){
         return config[id];
     };
+    this.check=function(id){
+        if(typeof config[id] !=== "undefined")
+            return true;
+        return false;
+    }
     var config = {};
     readDefault();
     read();
