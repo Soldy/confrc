@@ -19,10 +19,12 @@ exports.confrc=function(){
         }
     };
     this.get=function(id){
+        if(typeof config[id] === "undefined")
+            return undefined;
         return config[id];
     };
     this.check=function(id){
-        if(typeof config[id] !=== "undefined")
+        if(typeof config[id] !== "undefined")
             return true;
         return false;
     }
