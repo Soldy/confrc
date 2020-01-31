@@ -4,7 +4,7 @@ const fs = require("fs");
 
 exports.confrc=function(){
     /*
-     * id @string
+     * @param {string} id
      * @public
      */
     this.get=function(id){
@@ -15,7 +15,7 @@ exports.confrc=function(){
         return config[id];
     };
     /*
-     * id @string
+     * @param {string}- id
      * @public
      */
     this.check=function(id){
