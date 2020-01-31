@@ -1,3 +1,4 @@
-![alt tag](https://raw.githubusercontent.com/Soldy/confrc/master/share/screenshoot2.png)
+![alt tag](https://travis-ci.com/Soldy/confrc.svg?branch=master)
+
 
 # confrc
