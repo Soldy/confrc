@@ -6,6 +6,7 @@ exports.confrc=function(){
     /*
      * @param {string} id
      * @public
+     * @return {mixed}
      */
     this.get=function(id){
         if(typeof id !== "string")
@@ -15,11 +16,15 @@ exports.confrc=function(){
         return config[id];
     };
     /*
-     * @param {string}- id
+     * @param {string} id
      * @public
+     * @return {boolean}
      */
     this.check=function(id){
-        if((typeof id !== "string") ||(typeof config[id] !== "undefined"))
+        if(
+            (typeof id !== "string")||
+            (typeof config[id] !== "undefined")
+        )
             return true;
         return false;
     }
@@ -27,7 +32,9 @@ exports.confrc=function(){
      * @private
      */
     let readDefault=function(){
-        config = JSON.parse(fs.readFileSync("env.confrc.default.json").toString());
+        config = JSON.parse(
+            fs.readFileSync("env.confrc.default.json").toString()
+        );
     };
     /*
      *@private
@@ -46,6 +53,7 @@ exports.confrc=function(){
     };
     /*
      * @private
+     * @var object
      */
     let config = {};
     //costructor
