@@ -1,23 +1,23 @@
 {
-  "name": "confrc",
-  "version": "1.0.0",
-  "description": "config manager",
-  "main": "index.js",
-  "scripts":{
-      "test": "node test.js"
-  },
-  "repository":{
-      "type": "git",
-      "url": "https://github.com/Soldy/confrc.git"
-  },
-  "keywords":[],
-  "author": "Soldy",
-  "license": "GPLv3",
-  "bugs": {
-      "url": "https://github.com/Soldy/confrc/issues"
-  },
-  "homepage": "https://github.com/Soldy/confrc#readme",
-  "devDependencies":{
-      "nanoTest": "0.9.9-beta5"
-  }
+    "name": "confrc",
+    "version": "1.0.0",
+    "description": "config manager",
+    "main": "index.js",
+    "scripts": {
+        "test": "node test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Soldy/confrc.git"
+    },
+    "keywords": [],
+    "author": "Soldy",
+    "license": "GPLv3",
+    "bugs": {
+        "url": "https://github.com/Soldy/confrc/issues"
+    },
+    "homepage": "https://github.com/Soldy/confrc#readme",
+    "devDependencies": {
+        "nanoTest": "0.9.9-beta8"
+    }
 }

@@ -1,3 +1,4 @@
+'strict mode'
 const fs = require("fs");
 
 
