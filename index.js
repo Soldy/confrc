@@ -14,7 +14,9 @@ exports.confrc=function(){
             return false;
         if(typeof config[id] === "undefined")
             return undefined;
-        return config[id];
+        if(typeof process.env[id] === 'undefined')
+             return config[id];
+        return process.env[id];
     };
     /*
      * @param {string} id
@@ -25,6 +27,7 @@ exports.confrc=function(){
         if(
             (typeof id !== "string")||
             (typeof config[id] !== "undefined")
+            (typeof process.env[id] !== "undefined")
         )
             return true;
         return false;
