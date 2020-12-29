@@ -1,5 +1,5 @@
-'strict mode'
-const fs = require("fs");
+'strict mode';
+const fs = require('fs');
 
 
 
@@ -10,12 +10,12 @@ exports.confrc=function(){
      * @return {mixed}
      */
     this.get=function(id){
-        if(typeof id !== "string")
+        if(typeof id !== 'string')
             return false;
-        if(typeof config[id] === "undefined")
+        if(typeof config[id] === 'undefined')
             return undefined;
         if(typeof process.env[id] === 'undefined')
-             return config[id];
+            return config[id];
         return process.env[id];
     };
     /*
@@ -25,19 +25,18 @@ exports.confrc=function(){
      */
     this.check=function(id){
         if(
-            (typeof id !== "string")||
-            (typeof config[id] !== "undefined")
-            (typeof process.env[id] !== "undefined")
+            (typeof id !== 'string')||
+            (typeof config[id] !== 'undefined')
         )
             return true;
         return false;
-    }
+    };
     /*
      * @private
      */
     let readDefault=function(){
         config = JSON.parse(
-            fs.readFileSync("env.confrc.default.json").toString()
+            fs.readFileSync('env.confrc.default.json').toString()
         );
     };
     /*
@@ -46,10 +45,10 @@ exports.confrc=function(){
     let read=function(){
         try{
             let standConfig = JSON.parse(
-                fs.readFileSync(".env.confrc.json").toString()
+                fs.readFileSync('.env.confrc.json').toString()
             );
             for(let i in standConfig)
-                if(typeof config[i] !== "undefined")
+                if(typeof config[i] !== 'undefined')
                     config[i]=standConfig[i];
         }catch(e){
             console.log(e);
