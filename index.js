@@ -1,8 +1,11 @@
-'strict mode';
+/*
+ *  @Soldy\confrc\2021.01.29\GPL3
+ */
+'use strict';
 const fs = require('fs');
-
-
-
+/*
+ * @prototype
+ */
 exports.confrc=function(){
     /*
      * @param {string} id
