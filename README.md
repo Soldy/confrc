@@ -13,7 +13,7 @@ Independent, simple, dependency less, config manager.
 
 ```
 
-##init
+## init
 ```javascript
 
 const confrc = new (require('./index.js')).confrc();
@@ -26,7 +26,7 @@ confrc.check('someConfig')
 
 ## config read
 ```javascript
-let someConfig = copnfrc.get('comeConfig');
+let someConfig = confrc.get('someConfig');
 
 ```
 
@@ -40,7 +40,7 @@ const confrc = new (require('./index.js')).confrc();
 if(!confrc.check('someConfig')){
     process.exit(5); 
 };
-let someConfig = copnfrc.get('comeConfig');
+let someConfig = confrc.get('someConfig');
 
 ```
 
