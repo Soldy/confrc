@@ -49,6 +49,7 @@ dist
 .git
 .npmignore
 .gitignore
+.github
 .editorconfig
 .eslintrc.json
 .jshintrc
@@ -58,7 +59,7 @@ eslint.sh
 
 .vuepress/dist
 .serverless/
-
+LICENSE
 .dynamodb/
 .fusebox/
 .tern-port
