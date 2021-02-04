@@ -1,12 +1,13 @@
 /*
- *  @Soldy\confrc\2021.01.29\GPL3
+ *  @Soldy\confrc\2021.02.04\GPL3
  */
 'use strict';
 const fs = require('fs');
+
 /*
  * @prototype
  */
-exports.confrc=function(){
+const confrcBase=function(){
     /*
      * @param {string} id
      * @public
@@ -37,7 +38,7 @@ exports.confrc=function(){
     /*
      * @private
      */
-    let readDefault=function(){
+    const readDefault=function(){
         config = JSON.parse(
             fs.readFileSync('env.confrc.default.json').toString()
         );
@@ -45,7 +46,7 @@ exports.confrc=function(){
     /*
      *@private
      */
-    let read=function(){
+    const read=function(){
         try{
             let standConfig = JSON.parse(
                 fs.readFileSync('.env.confrc.json').toString()
@@ -67,4 +68,5 @@ exports.confrc=function(){
     read();
 };
 
+exports.base = confrcBase;
 

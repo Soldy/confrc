@@ -1,5 +1,5 @@
 const nanoTest  = new (require("nanoTest")).test();
-const confrc = new (require('./index.js')).confrc();
+const confrc = new (require('./index.js')).base();
 
 
 nanoTest.add(
