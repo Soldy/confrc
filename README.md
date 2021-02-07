@@ -1,5 +1,3 @@
-![alt tag](https://travis-ci.com/Soldy/confrc.svg?branch=master)
-
 
 # confrc
 Independent, simple, dependency less, config manager.
