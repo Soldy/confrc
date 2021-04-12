@@ -14,7 +14,7 @@ Independent, simple, dependency less, config manager.
 ## init
 ```javascript
 
-const confrc = new (require('./index.js')).confrc();
+const confrc = new (require('confrc')).confrc();
 ```
 
 ## check if config exist
@@ -33,7 +33,7 @@ let someConfig = confrc.get('someConfig');
 ## more example
 ```javascript
 
-const confrc = new (require('./index.js')).confrc();
+const confrc = new (require('confrc')).confrc();
 
 if(!confrc.check('someConfig')){
     process.exit(5); 
