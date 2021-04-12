@@ -1,6 +1,6 @@
 
 # confrc
-Independent, simple, dependency less, config manager.
+Independent, simple, universe compatible, config manager.
 
 
 ## config format 
