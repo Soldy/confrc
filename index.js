@@ -3,6 +3,8 @@
  */
 'use strict';
 const fs = require('fs');
+require('theuniverse');
+const $universe = global.theUn1v3rse.controls.interface();
 
 /*
  * @prototype
@@ -13,13 +15,20 @@ const confrcBase=function(){
      * @public
      * @return {mixed}
      */
-    this.get=function(id){
+    this.get=function(id, value){
         if(typeof id !== 'string')
-            return false;
-        if(typeof config[id] === 'undefined')
-            return undefined;
+            return $univers.error(
+                TypeError('ConfrC Id expectd as a string')
+            );
+        if(typeof _config[id] === 'undefined'){
+            if (typeof value === 'undefined')
+                return $universe.error(
+                     Error('ConfRc Value is undefined')
+                );
+            return value
+        }
         if(typeof process.env[id] === 'undefined')
-            return config[id];
+            return _config[id];
         return process.env[id];
     };
     /*
@@ -30,7 +39,7 @@ const confrcBase=function(){
     this.check=function(id){
         if(
             (typeof id !== 'string')||
-            (typeof config[id] !== 'undefined')
+            (typeof _config[id] !== 'undefined')
         )
             return true;
         return false;
@@ -38,22 +47,22 @@ const confrcBase=function(){
     /*
      * @private
      */
-    const readDefault=function(){
-        config = JSON.parse(
+    const _readDefault=function(){
+        _config = JSON.parse(
             fs.readFileSync('env.confrc.default.json').toString()
         );
     };
     /*
      *@private
      */
-    const read=function(){
+    const _read=function(){
         try{
             let standConfig = JSON.parse(
                 fs.readFileSync('.env.confrc.json').toString()
             );
             for(let i in standConfig)
-                if(typeof config[i] !== 'undefined')
-                    config[i]=standConfig[i];
+                if(typeof _config[i] !== 'undefined')
+                    _config[i]=standConfig[i];
         }catch(e){
             console.log(e);
         }
@@ -62,10 +71,10 @@ const confrcBase=function(){
      * @private
      * @var object
      */
-    let config = {};
+    let _config = {};
     //costructor
-    readDefault();
-    read();
+    _readDefault();
+    _read();
 };
 
 exports.base = confrcBase;

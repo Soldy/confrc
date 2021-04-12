@@ -98,7 +98,7 @@ nanoTest.add(
         "function":confrc.get,
         "options":['test5']
     },
-    "===",
-    undefined
+    "!==",
+    1
 );
 nanoTest.run();
