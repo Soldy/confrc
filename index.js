@@ -17,12 +17,12 @@ const confrcBase=function(){
      */
     this.get=function(id, value){
         if(typeof id !== 'string')
-            return $univers.error(
+            throw $univers.error(
                 TypeError('ConfrC Id expectd as a string')
             );
         if(typeof _config[id] === 'undefined'){
             if (typeof value === 'undefined')
-                return $universe.error(
+                throw $universe.error(
                      Error('ConfRc Value is undefined')
                 );
             return value
