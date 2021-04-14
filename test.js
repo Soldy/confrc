@@ -95,7 +95,13 @@ nanoTest.add(
 nanoTest.add(
     "get test5 ",
     {
-        "function":confrc.get,
+        "function":function(){
+            try{
+                confrc.get('test5');
+            }catch(err){
+                return err;
+            }
+        },
         "options":['test5']
     },
     "!==",
