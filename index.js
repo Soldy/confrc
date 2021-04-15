@@ -5,6 +5,7 @@
 const fs = require('fs');
 require('theuniverse');
 const $universe = global.theUn1v3rse.controls.interface();
+const $clonerc = new (require('clonerc')).base();
 
 /*
  * @prototype
@@ -16,20 +17,7 @@ const confrcBase=function(){
      * @return {mixed}
      */
     this.get=function(id, value){
-        if(typeof id !== 'string')
-            throw $univers.error(
-                TypeError('ConfrC Id expectd as a string')
-            );
-        if(typeof _config[id] === 'undefined'){
-            if (typeof value === 'undefined')
-                throw $universe.error(
-                     Error('ConfRc Value is undefined')
-                );
-            return value
-        }
-        if(typeof process.env[id] === 'undefined')
-            return _config[id];
-        return process.env[id];
+        return _get(id, value);
     };
     /*
      * @param {string} id
@@ -67,6 +55,31 @@ const confrcBase=function(){
             console.log(e);
         }
     };
+    /*
+     * @param {string} id
+     * @private
+     * @return {mixed}
+     */
+     const _get = function(id, value){
+        if(typeof id !== 'string')
+            throw $universe.error(
+                TypeError('ConfrC Id expectd as a string')
+            );
+        if(typeof _config[id] === 'undefined'){
+            if (typeof value === 'undefined')
+                throw $universe.error(
+                     Error('ConfRc Value is undefined')
+                );
+            return value
+        }
+        if(typeof process.env[id] === 'undefined')
+            return $clonerc.faster(
+                _config[id]
+            );
+        return $clonerc.faster(
+            process.env[id]
+        );
+    }
     /*
      * @private
      * @var object

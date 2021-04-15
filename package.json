@@ -1,6 +1,6 @@
 {
     "name": "confrc",
-    "version": "1.0.1-rc2",
+    "version": "1.0.1-rc4",
     "description": "config manager",
     "main": "index.js",
     "scripts": {
@@ -32,6 +32,7 @@
         "nanoTest": ">=0.9.9-beta17c"
     },
     "dependencies": {
-        "theuniverse": ">=0.2.0"
+        "clonerc": "0.0.2",
+        "theuniverse": "^0.2.0"
     }
 }
