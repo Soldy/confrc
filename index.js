@@ -52,7 +52,9 @@ const confrcBase=function(){
             );
             for(let i in standConfig)
                 if(typeof _config[i] !== 'undefined')
-                    _config[i]=standConfig[i];
+                    _config[i]=$clonerc.faster(
+                        standConfig[i]
+                    );
         }catch(e){
             // We do not throw if the user cinfig not exist
             $universe.error(e);
@@ -63,7 +65,7 @@ const confrcBase=function(){
      * @private
      * @return {mixed}
      */
-     const _get = function(id, value){
+     const _get=function(id, value){
         if(typeof id !== 'string')
             throw $universe.error(
                 TypeError('ConfrC Id expectd as a string')
