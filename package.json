@@ -1,6 +1,6 @@
 {
     "name": "confrc",
-    "version": "1.0.1-rc4",
+    "version": "1.0.1-rc5",
     "description": "config manager",
     "main": "index.js",
     "scripts": {
@@ -29,7 +29,7 @@
     },
     "homepage": "https://github.com/Soldy/confrc#readme",
     "devDependencies": {
-        "nanoTest": ">=0.9.9-beta17c"
+        "nanoTest": ">=0.9.9-beta20"
     },
     "dependencies": {
         "clonerc": "0.0.2",
