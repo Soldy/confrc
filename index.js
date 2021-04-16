@@ -33,6 +33,8 @@ const confrcBase=function(){
         return false;
     };
     /*
+     * This is part of the boot process ...
+     * Have to be Sync
      * @private
      */
     const _readDefault=function(){
@@ -52,7 +54,8 @@ const confrcBase=function(){
                 if(typeof _config[i] !== 'undefined')
                     _config[i]=standConfig[i];
         }catch(e){
-            console.log(e);
+            // We do not throw if the user cinfig not exist
+            $universe.error(e);
         }
     };
     /*
