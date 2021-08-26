@@ -25,12 +25,7 @@ const confrcBase=function(){
      * @return {boolean}
      */
     this.check=function(id){
-        if(
-            (typeof id !== 'string')||
-            (typeof _config[id] !== 'undefined')
-        )
-            return true;
-        return false;
+        return _check(id);
     };
     /*
      * This is part of the boot process ...
@@ -45,45 +40,61 @@ const confrcBase=function(){
     /*
      *@private
      */
-    const _read=function(){
+    const _readEnv=function(){
+        for(let id in standConfig)
+            if(typeof process.env[id] !== 'undefined')
+                _config[id]=$clonerc.faster(
+                    process.env[id]
+                );
+    }
+    /*
+     *@private
+     */
+    const _readLocal=function(){
         try{
             let standConfig = JSON.parse(
                 fs.readFileSync('.env.confrc.json').toString()
             );
-            for(let i in standConfig)
-                if(typeof _config[i] !== 'undefined')
-                    _config[i]=$clonerc.faster(
-                        standConfig[i]
+            for(let id in standConfig)
+                if(typeof _config[id] !== 'undefined')
+                    _config[id]=$clonerc.faster(
+                        standConfig[id]
                     );
         }catch(e){
-            // We do not throw if the user cinfig not exist
+            // We do not throw if the user config not exist
             $universe.error(e);
         }
     };
     /*
      * @param {string} id
+     * @param {string} value
      * @private
      * @return {mixed}
      */
-     const _get=function(id, value){
+    const _get=function(id, value){
+        if(_check(id))
+            return $clonerc.faster(
+                _config[id]
+            );
+        if (typeof value !== 'undefined')
+            return value;
+       throw $universe.error(
+           Error('ConfRc Value is undefined')
+       );
+    }
+    /*
+     * @param {string} id
+     * @private
+     * @return {boolean}
+     */
+    const _check=function(id){
         if(typeof id !== 'string')
             throw $universe.error(
                 TypeError('ConfrC Id expectd as a string')
             );
-        if(typeof _config[id] === 'undefined'){
-            if (typeof value === 'undefined')
-                throw $universe.error(
-                     Error('ConfRc Value is undefined')
-                );
-            return value
-        }
-        if(typeof process.env[id] === 'undefined')
-            return $clonerc.faster(
-                _config[id]
-            );
-        return $clonerc.faster(
-            process.env[id]
-        );
+        if(typeof _config[id] !== 'undefined')
+            return true;
+        return false;
     }
     /*
      * @private
@@ -92,7 +103,8 @@ const confrcBase=function(){
     let _config = {};
     //costructor
     _readDefault();
-    _read();
+    _readEnv();
+    _readLocal();
 };
 
 exports.base = confrcBase;
