@@ -41,11 +41,24 @@ const confrcBase=function(){
      *@private
      */
     const _readEnv=function(){
-        for(let id in standConfig)
-            if(typeof process.env[id] !== 'undefined')
-                _config[id]=$clonerc.faster(
-                    process.env[id]
+        let config = {};
+        for(let line of (fs.readFileSync('.env')).split(/\r\n|\n/)){
+            let data = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+            if (data === null)
+                continue;
+            let name = data[0].trim();
+            let value = data[1].trim();
+            let end = val-1;
+            if(
+                (value[0] === '"' && value[end] === '"')&&
+                (value[0] === '"' && value[end] === "'")
+            )
+                value = value.substring(1, end));
+            if(typeof _config[name] !== 'undefined')
+                _config[name]=$clonerc.faster(
+                     value
                 );
+        }
     }
     /*
      *@private
