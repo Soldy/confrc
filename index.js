@@ -8,6 +8,36 @@ const $universe = global.theUn1v3rse.controls.interface();
 const $clonerc = new (require('clonerc')).base();
 
 /*
+ * @param {string}
+ * @private
+ * @return {object}
+ *
+ */
+const _envProcess=function(file){
+    if(!fs.existsSync(file))
+        return false;
+    let config = {};
+    for(let line of (fs.readFileSync(file)).toString().split(/\r\n|\n/)){
+        let data = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+        if (data === null)
+            continue;
+        let name = data[1].trim();
+        let value = data[2].trim();
+        let end = value.length-1;
+        if(
+            (value[0] === '"' && value[end] === '"')||
+            (value[0] === "'" && value[end] === "'")
+        )
+            value = value.substring(1, end);
+        if(parseInt(value).toString() === value)
+            value = parseInt(value);
+        config[name]=$clonerc.faster(
+            value
+        );
+    }
+    return config;
+};
+/*
  * @prototype
  */
 const confrcBase=function(){
@@ -33,36 +63,39 @@ const confrcBase=function(){
      * @private
      */
     const _readDefault=function(){
-        _config = JSON.parse(
+        let config = JSON.parse(
             fs.readFileSync('env.confrc.default.json').toString()
         );
+        for(let name in config)
+            _config[name]=$clonerc.faster(
+                 config[name]
+            );
     };
     /*
      *@private
      */
-    const _readEnv=function(){
-        if(!fs.existsSync('.env'))
+    const _readDotEnv=function(){
+        let config = _envProcess('env');
+        console.log(config);
+        if(config === false)
             return false;
-        let config = {};
-        for(let line of (fs.readFileSync('.env')).toString().split(/\r\n|\n/)){
-            let data = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
-            if (data === null)
-                continue;
-            let name = data[1].trim();
-            let value = data[2].trim();
-            let end = value.length-1;
-            if(
-                (value[0] === '"' && value[end] === '"')||
-                (value[0] === "'" && value[end] === "'")
-            )
-                value = value.substring(1, end);
-            if(parseInt(value).toString() === value)
-                value = parseInt(value);
+        for(let name in config)
+            _config[name]=$clonerc.faster(
+                 config[name]
+            );
+    }
+    /*
+     *@private
+     */
+    const _readLocalDotEnv=function(){
+        let config = _envProcess('.env');
+        if(config === false)
+            return false;
+        for(let name in config)
             if(typeof _config[name] !== 'undefined')
                 _config[name]=$clonerc.faster(
-                     value
+                     config[name]
                 );
-        }
     }
     /*
      *@private
@@ -117,8 +150,9 @@ const confrcBase=function(){
      */
     let _config = {};
     //costructor
+    _readDotEnv();
     _readDefault();
-    _readEnv();
+    _readLocalDotEnv();
     _readLocal();
 };
 

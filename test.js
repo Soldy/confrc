@@ -109,14 +109,6 @@ nanoTest.add(
     1
 );
 nanoTest.add(
-    "close the universe",
-    {
-        "function":function(){ $universe.exit; return true;}
-    },
-    "!==",
-    false
-);
-nanoTest.add(
     "get dotenv ",
     {
         "function":$confrc.get,
@@ -134,7 +126,34 @@ nanoTest.add(
     "===",
     7 
 );
+nanoTest.add(
+    "get d0tenv ",
+    {
+        "function":$confrc.get,
+        "options":['d0tenv']
+    },
+    "===",
+    "pig"
+);
+nanoTest.add(
+    "get d0t3nv ",
+    {
+        "function":$confrc.get,
+        "options":['d0t3nv']
+    },
+    "===",
+    8
+);
 
+
+nanoTest.add(
+    "close the universe",
+    {
+        "function":function(){ $universe.exit; return true;}
+    },
+    "!==",
+    false
+);
 
 
 nanoTest.run();
