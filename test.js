@@ -1,11 +1,12 @@
 const nanoTest  = new (require("nanoTest")).test();
-const confrc = new (require('./index.js')).base();
+const $confrc = new (require('./index.js')).base();
+const $universe = global.theUn1v3rse.controls.interface();
 
 
 nanoTest.add(
     "check test1 ",
     {
-        "function":confrc.check,
+        "function":$confrc.check,
         "options":['test1']
     },
     "===",
@@ -15,7 +16,7 @@ nanoTest.add(
 nanoTest.add(
     "check test2 ",
     {
-        "function":confrc.check,
+        "function":$confrc.check,
         "options":['test2']
     },
     "===",
@@ -25,7 +26,7 @@ nanoTest.add(
 nanoTest.add(
     "check test3 ",
     {
-        "function":confrc.check,
+        "function":$confrc.check,
         "options":['test3']
     },
     "===",
@@ -35,7 +36,7 @@ nanoTest.add(
 nanoTest.add(
     "check test4 ",
     {
-        "function":confrc.check,
+        "function":$confrc.check,
         "options":['test4']
     },
     "===",
@@ -45,7 +46,7 @@ nanoTest.add(
 nanoTest.add(
     "check test5 ",
     {
-        "function":confrc.check,
+        "function":$confrc.check,
         "options":['test5']
     },
     "===",
@@ -55,7 +56,7 @@ nanoTest.add(
 nanoTest.add(
     "get test1 ",
     {
-        "function":confrc.get,
+        "function":$confrc.get,
         "options":['test1']
     },
     "===",
@@ -65,7 +66,7 @@ nanoTest.add(
 nanoTest.add(
     "get test2 ",
     {
-        "function":confrc.get,
+        "function":$confrc.get,
         "options":['test2']
     },
     "===",
@@ -75,7 +76,7 @@ nanoTest.add(
 nanoTest.add(
     "get test3 ",
     {
-        "function":confrc.get,
+        "function":$confrc.get,
         "options":['test3']
     },
     "===",
@@ -85,7 +86,7 @@ nanoTest.add(
 nanoTest.add(
     "get test4 ",
     {
-        "function":confrc.get,
+        "function":$confrc.get,
         "options":['test4']
     },
     "===",
@@ -97,7 +98,7 @@ nanoTest.add(
     {
         "function":function(){
             try{
-                confrc.get('test5');
+                $confrc.get('test5');
             }catch(err){
                 return err;
             }
@@ -107,4 +108,33 @@ nanoTest.add(
     "!==",
     1
 );
+nanoTest.add(
+    "close the universe",
+    {
+        "function":function(){ $universe.exit; return true;}
+    },
+    "!==",
+    false
+);
+nanoTest.add(
+    "get dotenv ",
+    {
+        "function":$confrc.get,
+        "options":['dotenv']
+    },
+    "===",
+    "lifr"
+);
+nanoTest.add(
+    "get dot3nv ",
+    {
+        "function":$confrc.get,
+        "options":['dot3nv']
+    },
+    "===",
+    7 
+);
+
+
+
 nanoTest.run();
