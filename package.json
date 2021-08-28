@@ -1,6 +1,6 @@
 {
     "name": "confrc",
-    "version": "1.0.1-rc5",
+    "version": "1.0.2",
     "description": "config manager",
     "main": "index.js",
     "scripts": {
