@@ -41,19 +41,23 @@ const confrcBase=function(){
      *@private
      */
     const _readEnv=function(){
+        if(!fs.existsSync('.env'))
+            return false;
         let config = {};
-        for(let line of (fs.readFileSync('.env')).split(/\r\n|\n/)){
+        for(let line of (fs.readFileSync('.env')).toString().split(/\r\n|\n/)){
             let data = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
             if (data === null)
                 continue;
-            let name = data[0].trim();
-            let value = data[1].trim();
-            let end = val-1;
+            let name = data[1].trim();
+            let value = data[2].trim();
+            let end = value.length-1;
             if(
-                (value[0] === '"' && value[end] === '"')&&
-                (value[0] === '"' && value[end] === "'")
+                (value[0] === '"' && value[end] === '"')||
+                (value[0] === "'" && value[end] === "'")
             )
-                value = value.substring(1, end));
+                value = value.substring(1, end);
+            if(parseInt(value).toString() === value)
+                value = parseInt(value);
             if(typeof _config[name] !== 'undefined')
                 _config[name]=$clonerc.faster(
                      value
@@ -64,19 +68,17 @@ const confrcBase=function(){
      *@private
      */
     const _readLocal=function(){
-        try{
-            let standConfig = JSON.parse(
-                fs.readFileSync('.env.confrc.json').toString()
-            );
-            for(let id in standConfig)
-                if(typeof _config[id] !== 'undefined')
-                    _config[id]=$clonerc.faster(
-                        standConfig[id]
-                    );
-        }catch(e){
+        if(!fs.existsSync('.env.confrc.json'))
+            return false;
+        let standConfig = JSON.parse(
+            fs.readFileSync('.env.confrc.json').toString()
+        );
+        for(let id in standConfig)
+            if(typeof _config[id] !== 'undefined')
+                _config[id]=$clonerc.faster(
+                    standConfig[id]
+                );
             // We do not throw if the user config not exist
-            $universe.error(e);
-        }
     };
     /*
      * @param {string} id
