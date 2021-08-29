@@ -7,6 +7,20 @@ require('theuniverse');
 const $universe = global.theUn1v3rse.controls.interface();
 const $clonerc = new (require('clonerc')).base();
 
+
+/*
+ * @param {string}
+ * @private
+ * @return {object}
+ *
+ */
+const _jsonProcess=function(file){
+    if(!fs.existsSync(file))
+        return false;
+    return JSON.parse(
+        fs.readFileSync(file).toString()
+    );
+};
 /*
  * @param {string}
  * @private
@@ -26,10 +40,10 @@ const _envProcess=function(file){
         let end = value.length-1;
         if(
             (value[0] === '"' && value[end] === '"')||
-            (value[0] === "'" && value[end] === "'")
+            (value[0] === '\'' && value[end] === '\'')
         )
-            value = value.substring(1, end);
-        if(parseInt(value).toString() === value)
+            value = value.substring(1, end).toString();
+        else if(parseInt(value).toString() === value)
             value = parseInt(value);
         config[name]=$clonerc.faster(
             value
@@ -63,56 +77,51 @@ const confrcBase=function(){
      * @private
      */
     const _readDefault=function(){
-        let config = JSON.parse(
-            fs.readFileSync('env.confrc.default.json').toString()
-        );
-        for(let name in config)
-            _config[name]=$clonerc.faster(
-                 config[name]
-            );
+        const config = _jsonProcess('env.confrc.default.json');
+        _toConfig(config);
     };
     /*
      *@private
      */
     const _readDotEnv=function(){
         let config = _envProcess('env');
-        console.log(config);
-        if(config === false)
-            return false;
-        for(let name in config)
-            _config[name]=$clonerc.faster(
-                 config[name]
-            );
-    }
+        _toConfig(config);
+    };
     /*
      *@private
      */
     const _readLocalDotEnv=function(){
         let config = _envProcess('.env');
-        if(config === false)
-            return false;
-        for(let name in config)
-            if(typeof _config[name] !== 'undefined')
-                _config[name]=$clonerc.faster(
-                     config[name]
-                );
-    }
+        _setConfig(config);
+    };
     /*
      *@private
      */
     const _readLocal=function(){
-        if(!fs.existsSync('.env.confrc.json'))
+        const config = _jsonProcess('.env.confrc.json');
+        _setConfig(config);
+        // We do not throw if the user config not exist
+    };
+    const _toConfig=function(config){
+        if(config === false)
             return false;
-        let standConfig = JSON.parse(
-            fs.readFileSync('.env.confrc.json').toString()
-        );
-        for(let id in standConfig)
+        for(let name in config)
+            _config[name]=$clonerc.faster(
+                config[name]
+            );
+
+    };
+    const _setConfig=function(config){
+        if(config === false)
+            return false;
+        for(let id in config)
             if(typeof _config[id] !== 'undefined')
                 _config[id]=$clonerc.faster(
-                    standConfig[id]
+                    config[id]
                 );
-            // We do not throw if the user config not exist
+
     };
+
     /*
      * @param {string} id
      * @param {string} value
@@ -126,10 +135,10 @@ const confrcBase=function(){
             );
         if (typeof value !== 'undefined')
             return value;
-       throw $universe.error(
-           Error('ConfRc Value is undefined')
-       );
-    }
+        throw $universe.error(
+            Error('ConfRc Value is undefined')
+        );
+    };
     /*
      * @param {string} id
      * @private
@@ -143,7 +152,7 @@ const confrcBase=function(){
         if(typeof _config[id] !== 'undefined')
             return true;
         return false;
-    }
+    };
     /*
      * @private
      * @var object
