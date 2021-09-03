@@ -1,6 +1,6 @@
 {
     "name": "confrc",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "config manager",
     "main": "index.js",
     "scripts": {
@@ -33,6 +33,6 @@
     },
     "dependencies": {
         "clonerc": "0.0.2",
-        "theuniverse": "^0.2.0"
+        "theuniverse": "0.2.2"
     }
 }
