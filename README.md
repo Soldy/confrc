@@ -14,7 +14,7 @@ Independent, simple, universe compatible, config manager.
 ## init
 ```javascript
 
-const confrc = new (require('confrc')).confrc();
+const confrc = require('confrc').base;
 ```
 
 ## check if config exist
