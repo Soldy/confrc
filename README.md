@@ -33,7 +33,7 @@ let someConfig = confrc.get('someConfig');
 ## more example
 ```javascript
 
-const confrc = new (require('confrc')).confrc();
+const confrc = require('confrc')).confrc;
 
 if(!confrc.check('someConfig')){
     process.exit(5); 
