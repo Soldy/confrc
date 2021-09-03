@@ -1,5 +1,5 @@
 const nanoTest  = new (require('nanoTest')).test();
-const $confrc = new (require('./index.js')).base();
+const $confrc = require('./index.js').base;
 const $universe = global.theUn1v3rse.controls.interface();
 
 
