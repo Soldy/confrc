@@ -147,6 +147,15 @@ nanoTest.add(
 
 
 nanoTest.add(
+    'process.env test',
+    {
+        'function':function(){ return process.env['d0t3nv']; }
+    },
+    '===',
+    '8'
+);
+
+nanoTest.add(
     'close the universe',
     {
         'function':function(){ $universe.exit; return true;}
