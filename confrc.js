@@ -51,6 +51,14 @@ const _envProcess=function(file){
     }
     return config;
 };
+
+const _envPush=function(config){
+    for (let id in config)
+        process.env[id.toString()] = $clonerc.faster(
+            config[id]
+        );
+}
+
 /*
  * @prototype
  */
@@ -109,7 +117,6 @@ const confrcBase=function(){
             _config[name]=$clonerc.faster(
                 config[name]
             );
-
     };
     const _setConfig=function(config){
         if(config === false)
@@ -121,12 +128,23 @@ const confrcBase=function(){
                 );
 
     };
-
+    /*
+     * @private
+     * @return {object}
+     */
+    const _getAll=function(){
+        let out = {};
+        for (let id in _config)
+            out[id.toString()] = $clonerc.faster(
+                _config[id]
+            );
+        return out;
+    }
     /*
      * @param {string} id
      * @param {string} value
      * @private
-     * @return {mixed}
+     * @return {any}
      */
     const _get=function(id, value){
         if(_check(id))
@@ -163,6 +181,9 @@ const confrcBase=function(){
     _readDefault();
     _readLocalDotEnv();
     _readLocal();
+    _envPush(
+        _getAll()
+    );
 };
 
 exports.base = confrcBase;
