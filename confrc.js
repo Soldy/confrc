@@ -85,29 +85,33 @@ const confrcBase=function(){
      * @private
      */
     const _readDefault=function(){
-        const config = _jsonProcess('env.confrc.default.json');
-        _toConfig(config);
+        _toConfig(
+            _jsonProcess('env.confrc.default.json')
+        );
     };
     /*
      *@private
      */
     const _readDotEnv=function(){
-        let config = _envProcess('env');
-        _toConfig(config);
+        _toConfig(
+            _envProcess('env')
+        );
     };
     /*
      *@private
      */
     const _readLocalDotEnv=function(){
-        let config = _envProcess('.env');
-        _setConfig(config);
+        _setConfig(
+            _envProcess('.env')
+        );
     };
     /*
      *@private
      */
     const _readLocal=function(){
-        const config = _jsonProcess('.env.confrc.json');
-        _setConfig(config);
+        _setConfig(
+            _jsonProcess('.env.confrc.json')
+        );
         // We do not throw if the user config not exist
     };
     const _toConfig=function(config){
