@@ -1,9 +1,11 @@
 
 # confrc
-Independent, simple, universe compatible, config manager.
+Independent, simple, universe compatible, dotenv replacement config manager.
 
 
-## config format 
+## JSON way
+
+### config format 
 ```
 {
    'config':'value'
@@ -11,18 +13,18 @@ Independent, simple, universe compatible, config manager.
 
 ```
 
-## init
+### init
 ```javascript
 
 const confrc = require('confrc').base;
 ```
 
-## check if config exist
+### check if config exist
 ```javascript
 confrc.check('someConfig')
 ```
 
-## config read
+### config read
 ```javascript
 let someConfig = confrc.get('someConfig');
 
@@ -30,7 +32,7 @@ let someConfig = confrc.get('someConfig');
 
 
 
-## more example
+### more example
 ```javascript
 
 const confrc = require('confrc')).confrc;
@@ -41,4 +43,31 @@ if(!confrc.check('someConfig')){
 let someConfig = confrc.get('someConfig');
 
 ```
+
+
+
+## Benefits
+
+### Imutable response
+
+No more accidental config value change in the code.
+
+### Clean code
+
+
+
+### No more dotenv crash on linux
+
+
+
+### JSON format support
+
+
+### Forced type safety.
+
+
+### Sindows support ? 
+
+Its limited propably work
+
 
