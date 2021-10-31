@@ -158,7 +158,7 @@ const confrcBase=function(){
         if (typeof value !== 'undefined')
             return value;
         throw $universe.error(
-            Error('ConfRc Value is undefined')
+            Error('ConfRc Value "'+value+'" is undefined')
         );
     };
     /*
@@ -169,7 +169,10 @@ const confrcBase=function(){
     const _check=function(id){
         if(typeof id !== 'string')
             throw $universe.error(
-                TypeError('ConfrC Id expectd as a string')
+                TypeError(
+                   'ConfrC Id expectd as a string but is a '+
+                   (typeof id).toString()
+                 )
             );
         if(typeof _config[id] !== 'undefined')
             return true;
