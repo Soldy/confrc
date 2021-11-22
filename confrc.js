@@ -45,9 +45,8 @@ const _envProcess=function(file){
             value = value.substring(1, end).toString();
         else if(parseInt(value).toString() === value)
             value = parseInt(value);
-        config[name]=$clonerc.faster(
-            value
-        );
+
+        _envLevels(name, value, config);
     }
     return config;
 };
@@ -68,7 +67,9 @@ const _envLevels = function(env_leveled, value envs){
         if(typeof env === 'undefined')
             env = {};
         if(level === levels.lengh)
-            env = value;
+            env = $clonerc.faster(
+                value
+            );
     }
 }
 
