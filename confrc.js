@@ -59,6 +59,19 @@ const _envPush=function(config){
         );
 }
 
+const _envLevels = function(env_leveled, value envs){
+    let levels = env_leveled.split('_');
+    let level = 0;
+    for(let i of levels){
+        level++ ;
+        let env = envs[i];
+        if(typeof env === 'undefined')
+            env = {};
+        if(level === levels.lengh)
+            env = value;
+    }
+}
+
 /*
  * @prototype
  */
