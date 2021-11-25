@@ -12,7 +12,6 @@ const $clonerc = new (require('clonerc')).base();
  * @param {string}
  * @private
  * @return {object}
- *
  */
 const _jsonProcess=function(file){
     if(!fs.existsSync(file))
@@ -25,7 +24,6 @@ const _jsonProcess=function(file){
  * @param {string}
  * @private
  * @return {object}
- *
  */
 const _envProcess=function(file){
     if(!fs.existsSync(file))
@@ -45,20 +43,26 @@ const _envProcess=function(file){
             value = value.substring(1, end).toString();
         else if(parseInt(value).toString() === value)
             value = parseInt(value);
-
         _envLevels(name, value, config);
     }
     return config;
 };
 
+/*
+ * @param {object}
+ */
 const _envPush=function(config){
     for (let id in config)
         process.env[id.toString()] = $clonerc.faster(
             config[id]
         );
-}
+};
 
-const _envLevels = function(env_leveled, value envs){
+/*
+ * @param {string}
+ * @param {string||number}
+ */
+const _envLevels = function(env_leveled, value, envs){
     let levels = env_leveled.split('_');
     let level = 0;
     for(let i of levels){
@@ -71,7 +75,7 @@ const _envLevels = function(env_leveled, value envs){
                 value
             );
     }
-}
+};
 
 /*
  * @prototype
@@ -104,7 +108,7 @@ const confrcBase=function(){
         );
     };
     /*
-     *@private
+     * @private
      */
     const _readDotEnv=function(){
         _toConfig(
@@ -112,7 +116,7 @@ const confrcBase=function(){
         );
     };
     /*
-     *@private
+     * @private
      */
     const _readLocalDotEnv=function(){
         _setConfig(
@@ -128,6 +132,10 @@ const confrcBase=function(){
         );
         // We do not throw if the user config not exist
     };
+    /*
+     * @param {array}
+     * @private
+     */
     const _toConfig=function(config){
         if(config === false)
             return false;
@@ -136,6 +144,10 @@ const confrcBase=function(){
                 config[name]
             );
     };
+    /*
+     * @param {array}
+     * @private
+     */
     const _setConfig=function(config){
         if(config === false)
             return false;
@@ -144,7 +156,6 @@ const confrcBase=function(){
                 _config[id]=$clonerc.faster(
                     config[id]
                 );
-
     };
     /*
      * @private
@@ -157,7 +168,7 @@ const confrcBase=function(){
                 _config[id]
             );
         return out;
-    }
+    };
     /*
      * @param {string} id
      * @param {string} value
@@ -184,9 +195,9 @@ const confrcBase=function(){
         if(typeof id !== 'string')
             throw $universe.error(
                 TypeError(
-                   'ConfrC Id expectd as a string but is a '+
+                    'ConfrC Id expectd as a string but is a '+
                    (typeof id).toString()
-                 )
+                )
             );
         if(typeof _config[id] !== 'undefined')
             return true;
@@ -197,7 +208,7 @@ const confrcBase=function(){
      * @var object
      */
     let _config = {};
-    //costructor
+    //constructor
     _readDotEnv();
     _readDefault();
     _readLocalDotEnv();
