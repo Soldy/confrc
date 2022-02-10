@@ -57,7 +57,7 @@ const _envPush=function(config){
         process.env[id.toString()] = $clonerc.faster(
             config[id]
         );
-}
+};
 
 /*
  * @prototype
@@ -143,7 +143,7 @@ const confrcBase=function(){
                 _config[id]
             );
         return out;
-    }
+    };
     /*
      * @param {string} id
      * @param {string} value
@@ -170,9 +170,9 @@ const confrcBase=function(){
         if(typeof id !== 'string')
             throw $universe.error(
                 TypeError(
-                   'ConfrC Id expectd as a string but is a '+
+                    'ConfrC Id expectd as a string but is a '+
                    (typeof id).toString()
-                 )
+                )
             );
         if(typeof _config[id] !== 'undefined')
             return true;
