@@ -66,8 +66,5 @@ No more accidental config value change in the code.
 ### Forced type safety.
 
 
-### Sindows support ? 
-
-Its limited propably work
 
 
