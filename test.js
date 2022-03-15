@@ -1,4 +1,6 @@
-const nanoTest  = new (require('nanoTest')).test();
+const nanoTest  = new (require('nanoTest')).test({
+    'progress_bar':false
+});
 const $confrc = require('./index.js').base;
 const $universe = global.theUn1v3rse.controls.interface();
 
