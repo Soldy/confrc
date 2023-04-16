@@ -10,7 +10,7 @@ const $clonerc = new (require('clonerc')).base();
 
 /*
  * @param {string}
- * @private
+ * @protected
  * @return {object}
  */
 const _jsonProcess=function(file){
@@ -22,7 +22,7 @@ const _jsonProcess=function(file){
 };
 /*
  * @param {string}
- * @private
+ * @protected
  * @return {object}
  */
 const _envProcess=function(file){
@@ -50,6 +50,7 @@ const _envProcess=function(file){
 
 /*
  * @param {object}
+ * @protected
  */
 const _envPush=function(config){
     for (let id in config)
@@ -61,6 +62,7 @@ const _envPush=function(config){
 /*
  * @param {string}
  * @param {string||number}
+ * @protected
  */
 const _envLevels = function(env_leveled, value, envs){
     let levels = env_leveled.split('_');
